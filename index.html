@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Valentine Alert 💖</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Alert ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -34,10 +34,20 @@ body{
 h1{
   font-family:'Playfair Display',serif;
   font-size:2.4rem;
-  margin-bottom:14px;
+  margin-bottom:12px;
+  animation:fadeUp 1.2s ease;
 }
 
-.subtitle{font-size:1.1rem;margin-bottom:25px;}
+.subtitle{
+  font-size:1.1rem;
+  margin-bottom:26px;
+  animation:fadeUp 1.6s ease;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(25px)}
+  to{opacity:1;transform:translateY(0)}
+}
 
 .buttons{position:relative;height:140px;}
 
@@ -81,32 +91,51 @@ button{
   display:none;
   flex-direction:column;
   text-align:center;
-  animation:fade 0.6s ease;
+  animation:fadeIn 1.2s ease;
 }
 
 .love-text{
   font-family:'Playfair Display',serif;
-  font-size:1.25rem;
-  line-height:1.5;
-  margin-bottom:16px;
+  font-size:1.3rem;
+  line-height:1.6;
+  margin-bottom:18px;
+  animation:textGlow 2s infinite alternate;
+}
+
+@keyframes textGlow{
+  from{text-shadow:0 0 10px rgba(255,255,255,0.4)}
+  to{text-shadow:0 0 25px rgba(255,255,255,0.9)}
 }
 
 .love img{
-  width:280px;
+  width:300px;
   max-width:90%;
-  border-radius:20px;
-  box-shadow:0 15px 40px rgba(0,0,0,0.3);
+  border-radius:22px;
+  box-shadow:0 20px 45px rgba(0,0,0,0.35);
 }
 
 .final-line{
-  margin-top:18px;
+  margin-top:20px;
   font-style:italic;
-  font-size:1.05rem;
+  font-size:1.1rem;
 }
 
-@keyframes fade{
+@keyframes fadeIn{
   from{opacity:0}
   to{opacity:1}
+}
+
+/* Falling hearts */
+.fall{
+  position:fixed;
+  top:-10px;
+  pointer-events:none;
+  animation:fall linear forwards;
+  z-index:1;
+}
+
+@keyframes fall{
+  to{transform:translateY(110vh);opacity:0}
 }
 
 /* Modal */
@@ -127,8 +156,7 @@ button{
   border-radius:18px;
   text-align:center;
   font-family:'Playfair Display',serif;
-  font-size:1.25rem;
-  box-shadow:0 20px 50px rgba(0,0,0,0.35);
+  font-size:1.3rem;
   animation:pop 0.35s ease;
 }
 
@@ -136,30 +164,17 @@ button{
   from{transform:scale(0.85);opacity:0}
   to{transform:scale(1);opacity:1}
 }
-
-/* Falling emojis */
-.fall{
-  position:fixed;
-  top:-10px;
-  pointer-events:none;
-  animation:fall linear forwards;
-  z-index:1;
-}
-
-@keyframes fall{
-  to{transform:translateY(110vh);opacity:0}
-}
 </style>
 </head>
 
 <body>
 
-<audio id="music" preload="auto" loop playsinline>
+<audio id="music" loop>
   <source src="https://cdn.pixabay.com/audio/2023/03/27/audio_6a4b2df9bb.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container" id="main">
-  <h1>OFFICIAL NOTICE 💖</h1>
+  <h1>OFFICIAL NOTICE ❤️</h1>
   <div class="subtitle">
     Dear <b>Sakshi</b>,<br>
     this website has only one mission 😌
@@ -194,6 +209,8 @@ button{
 </div>
 
 <script>
+const hearts = ["💗","❤️","💖","💘","💝","❤️‍🔥"];
+
 const music = document.getElementById("music");
 const playBtn = document.getElementById("playMusic");
 const yesBtn = document.getElementById("yes");
@@ -202,47 +219,37 @@ const main = document.getElementById("main");
 const love = document.getElementById("love");
 const modal = document.getElementById("modal");
 
-playBtn.addEventListener("click", () => {
-  music.currentTime = 0;
-  music.play().then(() => {
-    playBtn.style.display = "none";
-  }).catch(() => {
-    alert("Turn volume up 😄");
-  });
-});
+playBtn.onclick = () => {
+  music.play();
+  playBtn.style.display="none";
+};
 
-function drop(emoji){
+function dropHeart(){
   const e = document.createElement("div");
-  e.className = "fall";
-  e.innerText = emoji;
+  e.className="fall";
+  e.innerText = hearts[Math.floor(Math.random()*hearts.length)];
   e.style.left = Math.random()*100 + "vw";
-  e.style.fontSize = (Math.random()*18 + 18) + "px";
+  e.style.fontSize = (Math.random()*20 + 20) + "px";
   e.style.animationDuration = (Math.random()*3 + 3) + "s";
   document.body.appendChild(e);
   setTimeout(()=>e.remove(),6000);
 }
 
 yesBtn.onclick = () => {
-  modal.style.display = "flex";
-
-  const hearts = setInterval(()=>drop("❤️"),300);
+  modal.style.display="flex";
+  setInterval(dropHeart, 220); // NON-STOP HEART SHOWER
 
   setTimeout(()=>{
-    modal.style.display = "none";
-    main.style.display = "none";
-    love.style.display = "flex";
-
-    const roses = setInterval(()=>drop("🌹"),500);
-
-    setTimeout(()=>clearInterval(hearts),5000);
-    setTimeout(()=>clearInterval(roses),7000);
+    modal.style.display="none";
+    main.style.display="none";
+    love.style.display="flex";
   },1200);
 };
 
 noBtn.onclick = () => {
-  alert("😏 Nope. Try once again… carefully.");
+  alert("😏 Wrong choice. Try again…");
 };
 </script>
 
 </body>
-  </html>
+</html>
