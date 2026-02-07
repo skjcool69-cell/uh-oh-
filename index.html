@@ -3,41 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💘 Valentine Alert 💘</title>
+<title>💖 Valentine Alert 💖</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
 }
 
 body{
   height:100vh;
-  background:radial-gradient(circle at top,#ff9a9e,#fad0c4);
+  background:linear-gradient(120deg,#ff9a9e,#fad0c4,#fbc2eb,#a6c1ee);
+  background-size:400% 400%;
+  animation:bgMove 12s ease infinite;
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
-  color:#fff;
+  color:white;
+  font-family:'Poppins',sans-serif;
+}
+
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
 .container{
   text-align:center;
-  padding:20px;
-  animation:zoomIn 1s ease;
+  padding:25px;
+  animation:fadeIn 1.2s ease;
 }
 
 h1{
-  font-size:2.3rem;
+  font-family:'Playfair Display',serif;
+  font-size:2.5rem;
   margin-bottom:15px;
 }
 
-p{
+.subtitle{
   font-size:1.1rem;
+  opacity:0.95;
   margin-bottom:25px;
-  line-height:1.5;
 }
 
 .buttons{
@@ -47,12 +59,13 @@ p{
 
 button{
   padding:15px 40px;
-  font-size:1.1rem;
+  font-size:1.05rem;
   border:none;
   border-radius:30px;
   cursor:pointer;
   position:absolute;
   transition:0.3s;
+  font-family:'Poppins',sans-serif;
 }
 
 #yes{
@@ -60,7 +73,7 @@ button{
   color:#ff4b7d;
   left:50%;
   transform:translateX(-120%);
-  box-shadow:0 10px 30px rgba(255,255,255,0.5);
+  box-shadow:0 0 25px rgba(255,255,255,0.6);
 }
 
 #no{
@@ -70,6 +83,18 @@ button{
   transform:translateX(20%);
 }
 
+#playMusic{
+  margin-top:25px;
+  padding:10px 26px;
+  border-radius:25px;
+  border:none;
+  background:white;
+  color:#ff4b7d;
+  font-size:0.95rem;
+  cursor:pointer;
+  box-shadow:0 0 20px rgba(255,255,255,0.6);
+}
+
 .love{
   display:none;
   flex-direction:column;
@@ -77,22 +102,37 @@ button{
   animation:fadeIn 1s ease;
 }
 
-.love h1{
-  font-size:2.6rem;
+.yay{
+  font-family:'Great Vibes',cursive;
+  font-size:3.2rem;
+  margin-bottom:10px;
+  animation:glow 1.5s infinite alternate;
+}
+
+@keyframes glow{
+  from{text-shadow:0 0 10px #fff}
+  to{text-shadow:0 0 30px #ffeb3b,0 0 50px #ff4081}
+}
+
+.love-text{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;
+  line-height:1.5;
+  margin-bottom:15px;
 }
 
 .love img{
   width:280px;
   max-width:90%;
   border-radius:20px;
-  margin-top:20px;
-  box-shadow:0 20px 40px rgba(0,0,0,0.3);
+  margin-top:15px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.3);
 }
 
 .final-line{
-  margin-top:20px;
-  font-size:1.15rem;
+  margin-top:18px;
   font-style:italic;
+  font-size:1.05rem;
   opacity:0.95;
 }
 
@@ -108,51 +148,46 @@ button{
   to{transform:translateY(-100vh);opacity:0;}
 }
 
-@keyframes zoomIn{
-  from{opacity:0;transform:scale(0.8);}
-  to{opacity:1;transform:scale(1);}
-}
-
 @keyframes fadeIn{
-  from{opacity:0;}
-  to{opacity:1;}
+  from{opacity:0;transform:scale(0.9);}
+  to{opacity:1;transform:scale(1);}
 }
 </style>
 </head>
 
 <body>
 
-<!-- Wanna Be Yours – instrumental vibe -->
+<!-- Guaranteed Music -->
 <audio id="music" loop>
   <source src="https://cdn.pixabay.com/audio/2023/03/27/audio_6a4b2df9bb.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container" id="main">
   <h1>🚨 OFFICIAL NOTICE 🚨</h1>
-  <p>
+  <div class="subtitle">
     Dear <b>Sakshi</b>,<br>
-    this website has only one purpose…<br>
-    to ask you something my heart already knows 😌
-  </p>
+    this website has only one mission 😌
+  </div>
 
   <div class="buttons">
     <button id="yes">YES 💖</button>
     <button id="no">NO 🙄</button>
   </div>
+
+  <button id="playMusic">🎵 Tap to play music</button>
 </div>
 
 <div class="love" id="love">
-  <h1>❤️ I WANNA BE YOURS</h1>
-  <p>
-    Sakshi,<br>
-    every version of my future somehow has you in it.  
-    Will you be my Valentine? 🌹
-  </p>
+  <div class="yay">Yayyyyy ✨🌈</div>
 
-  <!-- YOUR IMAGE -->
+  <div class="love-text">
+    Sakshi,<br>
+    every version of my future somehow has you in it.<br>
+    Will you be my Valentine? 🌹
+  </div>
+
   <img src="your-photo.jpg" alt="Us Together">
 
-  <!-- FINAL LINE -->
   <div class="final-line">
     “I don’t need forever. I just need you.”
   </div>
@@ -164,20 +199,21 @@ const noBtn=document.getElementById("no");
 const main=document.getElementById("main");
 const love=document.getElementById("love");
 const music=document.getElementById("music");
+const playBtn=document.getElementById("playMusic");
+
+playBtn.onclick=()=>{
+  music.play();
+  playBtn.style.display="none";
+};
 
 yesBtn.onclick=()=>{
   main.style.display="none";
   love.style.display="flex";
-  music.play();
   setInterval(createHeart,300);
 };
 
-noBtn.onmouseover=()=>{
-  alert("❌ Not an option. Sakshi already owns my heart 😌");
-  const x=Math.random()*(window.innerWidth-100);
-  const y=Math.random()*(window.innerHeight-100);
-  noBtn.style.left=x+"px";
-  noBtn.style.top=y+"px";
+noBtn.onclick=()=>{
+  alert("😏 Oops! Wrong choice detected.\nLet’s try that again… carefully 💖");
 };
 
 function createHeart(){
@@ -192,4 +228,4 @@ function createHeart(){
 </script>
 
 </body>
-</html>
+  </html>
