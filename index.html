@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💖 Valentine Alert 💖</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Valentine Alert 💖</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -14,27 +14,27 @@ body{
   height:100vh;
   background:linear-gradient(120deg,#ff9a9e,#fad0c4,#fbc2eb,#a6c1ee);
   background-size:400% 400%;
-  animation:bgMove 12s ease infinite;
+  animation:bg 12s ease infinite;
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
-  color:white;
   font-family:'Poppins',sans-serif;
+  color:#fff;
 }
 
-@keyframes bgMove{
+@keyframes bg{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
 
-.container{text-align:center;padding:25px;}
+.container{text-align:center;padding:25px;z-index:2;}
 
 h1{
   font-family:'Playfair Display',serif;
-  font-size:2.5rem;
-  margin-bottom:15px;
+  font-size:2.4rem;
+  margin-bottom:14px;
 }
 
 .subtitle{font-size:1.1rem;margin-bottom:25px;}
@@ -42,7 +42,7 @@ h1{
 .buttons{position:relative;height:140px;}
 
 button{
-  padding:15px 40px;
+  padding:14px 38px;
   font-size:1.05rem;
   border:none;
   border-radius:30px;
@@ -51,7 +51,7 @@ button{
 }
 
 #yes{
-  background:white;
+  background:#fff;
   color:#ff4b7d;
   left:50%;
   transform:translateX(-120%);
@@ -59,7 +59,7 @@ button{
 
 #no{
   background:#ff4b7d;
-  color:white;
+  color:#fff;
   left:50%;
   transform:translateX(20%);
 }
@@ -69,53 +69,47 @@ button{
   margin-top:25px;
   padding:10px 26px;
   border-radius:25px;
-  border:none;
-  background:white;
+  background:#fff;
   color:#ff4b7d;
   font-size:0.95rem;
   cursor:pointer;
   box-shadow:0 0 18px rgba(255,255,255,0.6);
 }
 
+/* Final slide */
 .love{
   display:none;
   flex-direction:column;
   text-align:center;
-  animation:fadeIn 0.6s ease;
-}
-
-.yay{
-  font-family:'Great Vibes',cursive;
-  font-size:3.2rem;
-  margin-bottom:10px;
-  animation:glow 1.4s infinite alternate;
-}
-
-@keyframes glow{
-  from{text-shadow:0 0 10px #fff}
-  to{text-shadow:0 0 28px #ffeb3b,0 0 46px #ff4081}
+  animation:fade 0.6s ease;
 }
 
 .love-text{
   font-family:'Playfair Display',serif;
-  font-size:1.2rem;
-  margin-bottom:15px;
+  font-size:1.25rem;
+  line-height:1.5;
+  margin-bottom:16px;
 }
 
 .love img{
   width:280px;
   max-width:90%;
   border-radius:20px;
-  margin-top:15px;
   box-shadow:0 15px 40px rgba(0,0,0,0.3);
 }
 
 .final-line{
   margin-top:18px;
   font-style:italic;
+  font-size:1.05rem;
 }
 
-/* ===== Modal ===== */
+@keyframes fade{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+/* Modal */
 .modal{
   display:none;
   position:fixed;
@@ -138,39 +132,34 @@ button{
   animation:pop 0.35s ease;
 }
 
-.modal-heart{
-  display:block;
-  margin-top:10px;
-  font-size:1.4rem;
-  animation:pulse 1s infinite;
-}
-
 @keyframes pop{
   from{transform:scale(0.85);opacity:0}
   to{transform:scale(1);opacity:1}
 }
 
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.15)}
-  100%{transform:scale(1)}
+/* Falling emojis */
+.fall{
+  position:fixed;
+  top:-10px;
+  pointer-events:none;
+  animation:fall linear forwards;
+  z-index:1;
 }
 
-@keyframes fadeIn{
-  from{opacity:0}
-  to{opacity:1}
+@keyframes fall{
+  to{transform:translateY(110vh);opacity:0}
 }
 </style>
 </head>
 
 <body>
 
-<audio id="music" loop>
+<audio id="music" preload="auto" loop playsinline>
   <source src="https://cdn.pixabay.com/audio/2023/03/27/audio_6a4b2df9bb.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container" id="main">
-  <h1>🚨 OFFICIAL NOTICE 🚨</h1>
+  <h1>OFFICIAL NOTICE 💖</h1>
   <div class="subtitle">
     Dear <b>Sakshi</b>,<br>
     this website has only one mission 😌
@@ -185,50 +174,69 @@ button{
 </div>
 
 <div class="love" id="love">
-  <div class="yay">Yayyyyy</div>
-
   <div class="love-text">
     Sakshi,<br>
     every version of my future somehow has you in it.<br>
-    Will you be my Valentine?
+    Will you be my Valentine? ❤️
   </div>
 
   <img src="your-photo.jpg" alt="Us Together">
 
   <div class="final-line">
-    “I don’t need forever. I just need you.”
+    “I don’t need forever. I just need you.” ❤️
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal" id="yayModal">
+<div class="modal" id="modal">
   <div class="modal-card">
-    Yayyyy that’s my baby
-    <span class="modal-heart">❤️</span>
+    Yayyyy that’s my baby ❤️
   </div>
 </div>
 
 <script>
+const music = document.getElementById("music");
+const playBtn = document.getElementById("playMusic");
 const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
-const playBtn = document.getElementById("playMusic");
-const music = document.getElementById("music");
 const main = document.getElementById("main");
 const love = document.getElementById("love");
-const modal = document.getElementById("yayModal");
+const modal = document.getElementById("modal");
 
-playBtn.onclick = () => {
-  music.play();
-  playBtn.style.display = "none";
-};
+playBtn.addEventListener("click", () => {
+  music.currentTime = 0;
+  music.play().then(() => {
+    playBtn.style.display = "none";
+  }).catch(() => {
+    alert("Turn volume up 😄");
+  });
+});
+
+function drop(emoji){
+  const e = document.createElement("div");
+  e.className = "fall";
+  e.innerText = emoji;
+  e.style.left = Math.random()*100 + "vw";
+  e.style.fontSize = (Math.random()*18 + 18) + "px";
+  e.style.animationDuration = (Math.random()*3 + 3) + "s";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),6000);
+}
 
 yesBtn.onclick = () => {
   modal.style.display = "flex";
+
+  const hearts = setInterval(()=>drop("❤️"),300);
+
   setTimeout(()=>{
     modal.style.display = "none";
     main.style.display = "none";
     love.style.display = "flex";
-  }, 1400);
+
+    const roses = setInterval(()=>drop("🌹"),500);
+
+    setTimeout(()=>clearInterval(hearts),5000);
+    setTimeout(()=>clearInterval(roses),7000);
+  },1200);
 };
 
 noBtn.onclick = () => {
@@ -237,4 +245,4 @@ noBtn.onclick = () => {
 </script>
 
 </body>
-</html>
+  </html>
