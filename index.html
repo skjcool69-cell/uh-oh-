@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine Alert ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -29,12 +29,16 @@ body{
   100%{background-position:0% 50%}
 }
 
-.container{text-align:center;padding:25px;z-index:2;}
+.container{
+  text-align:center;
+  padding:25px;
+  z-index:3;
+}
 
 h1{
   font-family:'Playfair Display',serif;
   font-size:2.4rem;
-  margin-bottom:12px;
+  margin-bottom:14px;
   animation:fadeUp 1.2s ease;
 }
 
@@ -49,7 +53,10 @@ h1{
   to{opacity:1;transform:translateY(0)}
 }
 
-.buttons{position:relative;height:140px;}
+.buttons{
+  position:relative;
+  height:140px;
+}
 
 button{
   padding:14px 38px;
@@ -74,58 +81,55 @@ button{
   transform:translateX(20%);
 }
 
-#playMusic{
+#begin{
   position:static;
   margin-top:25px;
-  padding:10px 26px;
+  padding:10px 28px;
   border-radius:25px;
   background:#fff;
   color:#ff4b7d;
-  font-size:0.95rem;
+  font-size:1rem;
   cursor:pointer;
   box-shadow:0 0 18px rgba(255,255,255,0.6);
 }
 
-/* Final slide */
-.love{
-  display:none;
-  flex-direction:column;
-  text-align:center;
-  animation:fadeIn 1.2s ease;
-}
-
-.love-text{
+/* Begin overlay */
+.begin-text{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   font-family:'Playfair Display',serif;
-  font-size:1.3rem;
-  line-height:1.6;
-  margin-bottom:18px;
-  animation:textGlow 2s infinite alternate;
+  font-size:2.3rem;
+  color:#fff;
+  text-shadow:0 0 25px rgba(255,255,255,0.9);
+  z-index:10;
+  animation:fadeOut 1.5s ease forwards;
 }
 
-@keyframes textGlow{
-  from{text-shadow:0 0 10px rgba(255,255,255,0.4)}
-  to{text-shadow:0 0 25px rgba(255,255,255,0.9)}
+@keyframes fadeOut{
+  from{opacity:1}
+  to{opacity:0}
 }
 
-.love img{
-  width:300px;
-  max-width:90%;
-  border-radius:22px;
-  box-shadow:0 20px 45px rgba(0,0,0,0.35);
+/* Fireworks */
+.firework{
+  position:fixed;
+  width:8px;
+  height:8px;
+  background:radial-gradient(circle,#fff,transparent);
+  border-radius:50%;
+  animation:explode 1.2s ease-out forwards;
+  pointer-events:none;
+  z-index:9;
 }
 
-.final-line{
-  margin-top:20px;
-  font-style:italic;
-  font-size:1.1rem;
+@keyframes explode{
+  to{transform:scale(6);opacity:0}
 }
 
-@keyframes fadeIn{
-  from{opacity:0}
-  to{opacity:1}
-}
-
-/* Falling hearts */
+/* Hearts */
 .fall{
   position:fixed;
   top:-10px;
@@ -146,7 +150,7 @@ button{
   background:rgba(0,0,0,0.45);
   align-items:center;
   justify-content:center;
-  z-index:10;
+  z-index:20;
 }
 
 .modal-card{
@@ -154,24 +158,46 @@ button{
   color:#ff4b7d;
   padding:22px 26px;
   border-radius:18px;
-  text-align:center;
   font-family:'Playfair Display',serif;
   font-size:1.3rem;
-  animation:pop 0.35s ease;
 }
 
-@keyframes pop{
-  from{transform:scale(0.85);opacity:0}
-  to{transform:scale(1);opacity:1}
+/* Final slide */
+.love{
+  display:none;
+  flex-direction:column;
+  text-align:center;
+  animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+.love-text{
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem;
+  line-height:1.6;
+  margin-bottom:18px;
+}
+
+.love img{
+  width:300px;
+  max-width:90%;
+  border-radius:22px;
+  box-shadow:0 20px 45px rgba(0,0,0,0.35);
+}
+
+.final-line{
+  margin-top:20px;
+  font-style:italic;
+  font-size:1.1rem;
 }
 </style>
 </head>
 
 <body>
-
-<audio id="music" loop>
-  <source src="https://cdn.pixabay.com/audio/2023/03/27/audio_6a4b2df9bb.mp3" type="audio/mpeg">
-</audio>
 
 <div class="container" id="main">
   <h1>OFFICIAL NOTICE ❤️</h1>
@@ -185,7 +211,7 @@ button{
     <button id="no">NO 🙄</button>
   </div>
 
-  <button id="playMusic">🎵 Tap to play music</button>
+  <button id="begin">✨ Tap to begin</button>
 </div>
 
 <div class="love" id="love">
@@ -211,33 +237,47 @@ button{
 <script>
 const hearts = ["💗","❤️","💖","💘","💝","❤️‍🔥"];
 
-const music = document.getElementById("music");
-const playBtn = document.getElementById("playMusic");
+const beginBtn = document.getElementById("begin");
 const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
 const main = document.getElementById("main");
 const love = document.getElementById("love");
 const modal = document.getElementById("modal");
 
-playBtn.onclick = () => {
-  music.play();
-  playBtn.style.display="none";
+beginBtn.onclick = () => {
+  beginBtn.style.display="none";
+
+  const txt = document.createElement("div");
+  txt.className="begin-text";
+  txt.innerText="Let’s goooo ✨";
+  document.body.appendChild(txt);
+
+  for(let i=0;i<16;i++){
+    const f=document.createElement("div");
+    f.className="firework";
+    f.style.left=Math.random()*100+"vw";
+    f.style.top=Math.random()*100+"vh";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1200);
+  }
+
+  setTimeout(()=>txt.remove(),1500);
 };
 
 function dropHeart(){
-  const e = document.createElement("div");
-  e.className="fall";
-  e.innerText = hearts[Math.floor(Math.random()*hearts.length)];
-  e.style.left = Math.random()*100 + "vw";
-  e.style.fontSize = (Math.random()*20 + 20) + "px";
-  e.style.animationDuration = (Math.random()*3 + 3) + "s";
-  document.body.appendChild(e);
-  setTimeout(()=>e.remove(),6000);
+  const h=document.createElement("div");
+  h.className="fall";
+  h.innerText=hearts[Math.floor(Math.random()*hearts.length)];
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(Math.random()*20+20)+"px";
+  h.style.animationDuration=(Math.random()*3+3)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
 }
 
 yesBtn.onclick = () => {
   modal.style.display="flex";
-  setInterval(dropHeart, 220); // NON-STOP HEART SHOWER
+  setInterval(dropHeart,220);
 
   setTimeout(()=>{
     modal.style.display="none";
